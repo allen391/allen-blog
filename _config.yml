@@ -12,7 +12,7 @@ github_repo: "https://github.com/allen391/allen391.github.io.git" # you code rep
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "Web Front-end Developer"
-sidebar-avatar: /img/about-allen.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/allen.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
