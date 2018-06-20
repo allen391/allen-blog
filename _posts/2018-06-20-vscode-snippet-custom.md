@@ -10,6 +10,14 @@ tags:
     - Snippet
 ---
 
+# Snippet custom
+
+>  how to design a Snippet  in VScode
+
+
+### The structure of the snippet
+- prefix: define the keywords which will be used in IntelliSense
+- body: The main content of which will be displayed when inputting the prefix
 - description
 
 
