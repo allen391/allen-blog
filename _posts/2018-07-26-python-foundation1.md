@@ -1,13 +1,4 @@
----
-layout:     post
-title:      Python Foundation(1)(ZH)
-subtitle:   Python Foundation
-date:       2018-07-26
-author:     Allen
-catalog: true
-tags:
-    - Python Foundation
----
+
 
 ## python概述
 ## 基础语法
@@ -50,7 +41,7 @@ tags:
 print('hello world')
 ```
 
-- ##### 单行注释
+##### 单行注释
 以#开头，只注释一行，多行注释需要在需要注释的内容开头分别添加
 
 <font color = blue>(诀窍，把多行代码选中，ctrl+/ 可以直接多行注释#)</font>
@@ -62,7 +53,7 @@ print('hello world')
 print ('hello world')
 ```
 
-- ##### 多行注释
+##### 多行注释
 '''注释内容'''或者"""注释内容"""，可以对多行内容整体进行注释
 
 <font color = red>实例3：</font>
@@ -78,19 +69,19 @@ print ('hello world')
 #以上两种方法都可以对多行进行注释
 ```
 
-- ##### 注释的作用
+##### 注释的作用
 描述一段代码的实现逻辑和功能，增强代码可读性，易于维护
 
-- ##### 注意
+##### 注意
 注释在代码执行过程中不会被执行，注释数量没有限制
 
 ### 4. 变量
 #### 4.1 变量的定义
-- 在python中，变量指向各种类型值的名字，当用到这个类型的值时，直接使用变量即可，不需要再写具体的值
+在python中，变量指向各种类型值的名字，当用到这个类型的值时，直接使用变量即可，不需要再写具体的值
 
-<font color = blue>格式：变量名 = 数值/字符串</font>
+格式：变量名 = 数值/字符串
 
-<font color = red>实例4：</font>
+实例4：
 ```
 a = 100
 b = 200 
@@ -113,7 +104,7 @@ print(q)
 - 变量名称命名简介明了，见名知意（意思就是说取变量名的时候最好用英文来当，最好是有实际意义的，这样阅读代码的时候可以知道变量的含义，如果需要，可以加以注释)
 - 使用type(变量)查看变量类型
 
-<font color = red>实例5：</font>
+实例5：
 ```
 #打印个人信息
 name = 'zhangsan'    #名字--字符串
@@ -145,7 +136,7 @@ zhangsan
 
 #### 5.1 Input()用于在程序中执行过程中接收用户输入的内容，默认接收的输入内容为字符串类型。
 
-<font color = red>实例6：</font>
+实例6：
 ```
 card_id = input("请输入卡号:")
 pwd = input("请输入密码:")
@@ -170,7 +161,7 @@ print(pwd)
 - 格式化输入
 - 格式化输出应用示例:print('你输入的名字是：%s'%name) 或者print('你输入的名字是{}。'.format(name))
 
-<font color = red>实例7：</font>
+实例7:
 ```
 name = input()
 print('你输入的名字是：%s'%name)
@@ -186,7 +177,7 @@ zhangsan
 ```
 #常用的格式化符号有 %d，%s，%f
 
-<font color = red>实例8：</font>
+实例8:
 ```
 #多个变量同时输出
 card_id = "234567"
@@ -206,7 +197,7 @@ print('您输入的卡号是：{},\n您输入的密码是：{}'.format(card_id,p
 您输入的密码是：123
 
 ```
-<font color = red>实例9：</font>
+实例9：
 ```
 #格式化输出浮点数,并指定精度
 height = 180.35234
@@ -221,7 +212,7 @@ print('您的身高是：{:.2f} cm'.format(height))
 您的身高是：180.35 cm
 
 ```
-<font color = red>实例10：</font>
+实例10：
 ```
 #格式化输出时，打印%，要使用%%表示是字符串而不是转换说明符
 p = 99.99321
@@ -234,7 +225,7 @@ print('您战胜了全国{:.2f}的用户'.format(p))
 您战胜了全国99.99的用户
 
 ```
-<font color = red>实例11：</font>
+实例11：
 ```
 #print无换行输出
 print("hello",end="")
@@ -247,7 +238,7 @@ hellopython
 
 ```
 
-<font color = red>实例12：</font>
+实例12：
 ```
 #输出换行符
 print("中国\n北京")
@@ -264,8 +255,7 @@ print("中国\\n北京")
 ### 6. 类型转换
 #### 不同的类型之间进行转换
 
-
-<font color = red>实例13：</font>
+实例13：
 
 ```
 a = 123
@@ -297,7 +287,7 @@ print(type(c))
 
 
 
-<font color = red>实例14：</font>
+实例14：
 ```
 #eval(str)把字符串自动转换成合适的数据类型
 a1= eval("123")
@@ -318,7 +308,7 @@ print(type(a2))
 - 由字母、数字、下划线（_）组成，不能以数字开头
 - 标识符区分大小写
 
-<font color = red>实例15：</font>
+实例15：
 ```
 #不能以数字开头
 2student = 'zhangsan'
@@ -333,7 +323,7 @@ print(2student)
 SyntaxError: invalid syntax
 ```
 
-<font color = red>实例16：</font>
+实例16：
 ```
 #python解释器是可以区分大小写的
 student_name = 'zhangsan'
@@ -357,7 +347,7 @@ lisi
 - 在python内部具有特殊功能的标识符
 - 通过keyword模块的kwlist函数查看
 
-<font color = red>实例17：</font>
+实例17：
 ```
 import keyword
 #打印py3的关键字，命名是不能使用的
@@ -374,7 +364,7 @@ print(keyword.kwlist)
 
 ### 8. 项目--计算器
 
-<font color = red>实例18：</font>
+实例18：
 ```
 num1 = input("请输入第一个数字：")
 operator = input("请输入运算符：")
@@ -398,52 +388,3 @@ elif operator == "//":
 else:
     print("正在开发..")
 ```
-
-### 9. 作业
-奶茶馆盛大开业了！今天，门店前立出了以下招牌：
-奶茶馆售卖宇宙无敌奶茶，奶茶虽好，可不要贪杯哦！ 每次限尝鲜一种口
-味：
-1）原味冰奶茶 3 元 2）香蕉冰奶茶 5 元 3) 草莓冰奶茶 5 元 4）蒟蒻冰
-奶茶 7 元 5）珍珠冰奶茶 7 元
-请您帮助小象奶茶馆的收银小妹设计一款价格结算系统，要求：
-1. 顾客可输入 1—5 来选择奶茶口味，输入其它数字则输出：
-'Woops! 我们只售卖以上五种奶茶哦！新口味敬请期待！'
-2. 顾客可输入购买数量，根据奶茶口味和数量计算总价。
-3. 顾客可输入是否为本馆会员，会员可以享受 8 折优惠。
-4. 输出顾客购买的详细信息，包括奶茶口味、购买数量、总价。
-若是会员输出会员价。建议大家使用格式化输出。
-
-<font color = red>仅作参考，希望能自己完成</font>
-```
-#设计一款价格结算系统的程序
-print('奶茶管盛大开业了！奶茶馆售卖宇宙无敌奶茶，奶茶虽好，可不要贪杯哦！')
-print('每次限尝鲜一种口味：\n 1）原味冰奶茶 3 元 \n 2）香蕉冰奶茶 5 元\n 3) 草莓冰奶茶 5 元\n 4）蒟蒻冰奶茶 7 元\n 5）珍珠冰奶茶 7 元')
-print('')
-#定义奶茶名称和价格
-mt_name = ['原味冰奶茶','香蕉冰奶茶','草莓冰奶茶','蒟蒻冰奶茶','珍珠冰奶茶']
-mt_price = [3,5,5,7,7]
-
-#输入数字，打印出顾客想购买的奶茶的种类
-species = input('亲，请输入想购买的奶茶口味对对应的数字：')
-spe_num = int(species)
-if spe_num < 6:
-    print('你购买的奶茶口味是{}，请确认！'.format(mt_name[spe_num - 1]))
-else:
-    print('Woops! 我们只售卖以上五种奶茶哦！新口味敬请期待！')
-print('')
-#输入数量并且计算总金额
-num = input('请输入要购买的数量：')
-count = int(num)
-amount = count * mt_price[spe_num-1]
-print('')
-#判断是否是会员
-number = input('亲，你是会员么，如果是请输入1，否则请输0，请输入：')
-cor_num = int(number)
-if cor_num == 1:
-    amount_end = amount * 0.9
-else:
-    amount_end = amount
-    
-print('你所购买的内容是:奶茶是{}，\n数量是{}，\n总金额是{:.2f}元。\n谢谢您的再次光临。'.format(mt_name[spe_num-1],count,amount_end))
-
-```  
