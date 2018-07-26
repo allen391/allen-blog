@@ -30,11 +30,7 @@ tags:
 
 
 ### 2. python的基础语法
-- 交互模式
 
-![交互模式](https://note.youdao.com/yws/public/resource/6ba936a8828c83c2940f8cb66c8405a1/xmlnote/81F2DC0654B1419481F9D821ED8F3CAD/2861)
-
-上图是在cmd环境中的运行模式
 
 - 开发流程
 1. ##### 创建以.py结尾的python文件
@@ -145,10 +141,6 @@ zhangsan
 ##更多的数据类型，见下图
 ```
 
-### 5. 数据类型
-
-![数据类型](https://note.youdao.com/yws/public/resource/6ba936a8828c83c2940f8cb66c8405a1/xmlnote/3967942698434656A06235263DAABC2F/2968)
-
 ### 6. input输入、print输出
 
 #### 6.1 Input()用于在程序中执行过程中接收用户输入的内容，默认接收的输入内容为字符串类型。
@@ -192,8 +184,6 @@ zhangsan
 
 #常用的格式符号见下图
 ```
-![格式化符号](https://note.youdao.com/yws/public/resource/6ba936a8828c83c2940f8cb66c8405a1/xmlnote/4CAC5A78037A476E8E32609C85288804/2971)
-
 #常用的格式化符号有 %d，%s，%f
 
 <font color = red>实例8：</font>
@@ -274,7 +264,6 @@ print("中国\\n北京")
 ### 7. 类型转换
 #### 不同的类型之间进行转换
 
-![图](https://note.youdao.com/yws/public/resource/6ba936a8828c83c2940f8cb66c8405a1/xmlnote/FC53F7091BFC4355A995CD43AF8B17ED/2969)
 
 <font color = red>实例13：</font>
 
@@ -385,11 +374,8 @@ print(keyword.kwlist)
 ### 9. 运算符和优先级
 #### 9.1 运算符
 
-![运算符](https://note.youdao.com/yws/public/resource/6ba936a8828c83c2940f8cb66c8405a1/xmlnote/6EE1BB7DF8464A3A83D0ADE03DED0007/2970)
 
 #### 9.2 运算符优先级
-![优先级](https://note.youdao.com/yws/public/resource/6ba936a8828c83c2940f8cb66c8405a1/xmlnote/0A823E6CDDE142FD9431DF7E6C6E1760/2972)
-
 
 ### 10. 项目--计算器
 
