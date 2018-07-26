@@ -1,4 +1,13 @@
-
+---
+layout:     post
+title:      Python Foundation (syntax)
+subtitle:   Python Foundation
+date:       2018-07-26
+author:     Allen
+catalog: true
+tags:
+    - Python Foundation
+---
 
 ## python概述
 ## 基础语法
@@ -35,7 +44,7 @@
 - ##### 使用注释的原因
 希望通过自己的语言来描述一段代码的实现逻辑和功能，方便理解代码，易于维护
 
-<font color = red>实例1：</font>
+实例1：
 ```
 #打印hello world
 print('hello world')
@@ -44,9 +53,9 @@ print('hello world')
 ##### 单行注释
 以#开头，只注释一行，多行注释需要在需要注释的内容开头分别添加
 
-<font color = blue>(诀窍，把多行代码选中，ctrl+/ 可以直接多行注释#)</font>
+(诀窍，把多行代码选中，ctrl+/ 可以直接多行注释#)
 
-<font color = red>实例2：</font>
+实例2：
 ```
 ##打印hello world
 #习惯输入空格，不要让代码挨的太近，不便于观察
@@ -56,7 +65,7 @@ print ('hello world')
 ##### 多行注释
 '''注释内容'''或者"""注释内容"""，可以对多行内容整体进行注释
 
-<font color = red>实例3：</font>
+实例3:
 ```
 """
 注释内容
