@@ -1,28 +1,35 @@
-<font size = 4>
+---
+layout:     post
+title:      Python Foundation (class && exception)
+subtitle:   Python Foundation
+date:       2018-07-26
+author:     Allen
+catalog: true
+tags:
+    - Python Foundation
+    - Class
+    - Exception
+---
 
 # 大纲
-## 类属性、类方法、静态方法
-## 单例类
-## 异常处理
-## 包和模块
-## 项目实践
+- 类属性、类方法、静态方法
+- 单例类
+- 异常处理
+- 包和模块
+- 项目实践
 ----
 
 ### 1. 类属性（可以理解为类中共享的全局变量）
 #### 1.1 实例属性
-- 所属于具体的实例对象，不同实例对象之间的实例属性互不影响
 
-![实例对象](https://note.youdao.com/yws/public/resource/6ba936a8828c83c2940f8cb66c8405a1/xmlnote/FAC7449A79C04545971F4C73DBB13260/3240)
-
-
-
+所属于具体的实例对象，不同实例对象之间的实例属性互不影响
 
 #### 1.2 类属性
 - 所属于类对象，多个实例对象之间共享同一个类属性
 - 获取类属性方法：类名.类属性
 - 通过实例对象不能够修改类属性
 
-<font color = red> 实例1：</font>
+实例1：
 ```
 class Person:
     #类属性
@@ -48,7 +55,7 @@ print(p1.sum_num,p2.sum_num,Person.sum_num)
 2 2 2
 
 ```
-<font color = red> 实例2：</font>
+实例2：
 ```
 class Person:
     #类属性
@@ -76,7 +83,7 @@ print(p1.sum_num,p2.sum_num,Person.sum_num)
 #由结果可知，通过实例对象不能修改类属性的值，如果修改的属性在实例中不存在，则动态添加实例属性
 ```
 
-<font color = red>实例3：</font>
+实例3：
 ```
 class Person:
     #类属性
@@ -105,7 +112,7 @@ print(p1.sum_num,Person.sum_num)
 - 定义类方法的第一个参数通常以"cls"参数作为类对象被传入
 - 调用方式：类名.类方法 或者 实例对象.类方法（不推荐）
 
-<font color = red >实例3：</font>
+实例3：
 ```
 class Person:
     #类属性
@@ -143,7 +150,7 @@ p.add_sum_num()
 - 使用@staticmethod修饰的方法，不需要默认传递任何参数
 - 调用方式：类名.静态方法 或者实例对象.静态方法
 
-<font color = red >实例4：</font>
+实例4：
 ```
 class Person:
     #类属性
@@ -190,7 +197,7 @@ p.static_test()
 - 必须要提供cls参数，代表类对象
 - 必须要有返回值，返回创建对象的引用
 
-<font color = red> 实例5：</font>
+实例5：
 ```
 """
 #过程：解释器先用new方法来创建object对象，然后返回一个引用来给init构造方法，
@@ -237,7 +244,7 @@ mysql
 #### 3.2 单例类
 - 在整个程序系统中确保某一个类只有一个实例对象
 
-<font color = red> 实例6：</font>
+实例6：
 ```
 #单例类
 class SingleInstance:
@@ -276,7 +283,7 @@ expect ExceptionType as err：
     异常处理方法
 
 ```
-<font color = red>实例7：</font>
+实例7：
 ```
 try:
     open("test.txt", "r")
@@ -302,7 +309,7 @@ except (ExceptionTypl1, ExceptionType2, ···) as err:
     异常处理方法
 ```
 
-<font color = red >实例8：</font>
+实例8：
 ```
 try:
     print(num)
@@ -329,7 +336,7 @@ except ExceptionType as err：
     异常处理方法
 ```
 
-<font color = red>实例9：</font>
+实例9：
 ```
 try:
     open("test.txt", "r")
@@ -358,7 +365,7 @@ finally:
     无论是否有异常产生，都会执行这里的代码块
 ```
 
-<font color = red>实例10：</font>
+实例10：
 ```
 f = None
 try:
@@ -379,7 +386,7 @@ finally:
 ```
 #### 3.5 函数嵌套异常传递
 
-<font color = red>实例11：</font>
+实例11：
 ```
 def test1(): #通过打印的方式也可以查询问的所在处
     print("------test1-1--------")
@@ -415,22 +422,10 @@ test2()
 
 链接：[模块和包](http://www.runoob.com/python/python-modules.html)
 
-![包和模块](https://note.youdao.com/yws/public/resource/6ba936a8828c83c2940f8cb66c8405a1/xmlnote/8C2AEDD70E354452861FEDBF87F546F5/3241)
 
-#### 4.1 模块的名字： .py文件的名字
+#### 4.1 不同包下可以有相同的模块名称，使用‘包名.模块名’的方式区分
 
-<font color = blue>下面是关于pycharm，能够引用包的设置步骤：若设置成功，则文件夹中间是实心，而非空心。</font>
-![image](https://note.youdao.com/yws/public/resource/6ba936a8828c83c2940f8cb66c8405a1/xmlnote/66B0A2D503B44E0DA64B7851886AD880/3444)
-
-<font color = blue>下图是包的形式，以.py的文件名字，包分别是bussiness和tool:</font>
-
-![image](https://note.youdao.com/yws/public/resource/6ba936a8828c83c2940f8cb66c8405a1/xmlnote/F1F35162F68D425A82C3AE829BA5B189/3443)
-
-#### 4.2 包下可以包含子包
-
-#### 4.3 不同包下可以有相同的模块名称，使用‘包名.模块名’的方式区分
-
-<font color = red>实例12：</font>
+实例12：
 ```
 import bussiness.model1,tool.model1
 #import tool.model1
@@ -439,12 +434,12 @@ bussiness.model1.project_info()
 tool.model1.tool_info()
 ```
 
-#### 4.4 引入模块的方式
+#### 4.2 引入模块的方式
 - 引入单个模块：import module_name
 - 引入多个模块：import module_name1,module_name2,···
 - 引入模块中的指定函数：from module_name import func1,func2,···
 
-<font color = red>实例13：</font>
+实例13：
 ```
 from bussiness import * #批量导入
 model3.test1()
@@ -461,7 +456,7 @@ model1.project_info()
 - 会在包或者该包下的模块被引入时自动调用
 - 常用于设置包和模块的一些初始化操作
 
-<font color = red>实例14：</font>
+实例14：
 ```
 #init可以对包进行初始化的设置
 print("init文件被自动调用")
@@ -475,7 +470,7 @@ __all__ = ["model3"]
 - 将不同的管理系统按照类别划分到不同的模块
 - 重构无人便利店项目
 
-<font color = red>实例15：</font>
+实例15：
 ```
 import datetime
 import csv
@@ -556,10 +551,3 @@ class UnstaffedStore:
 store = UnstaffedStore()
 store.shopping_hall()
 ```
-
-### 6. 作业
-
-在奶茶馆的顾客反馈中，有的顾客提出输入信息的时候一不小心输入格式错 误就会跳出系统，所以，您决定对输入异常进行处理，使用 try-except 语句，处 理的 points 如下： 
-1. 设置顾客输入生日为日期格式，并且对错误格式造成的异常进行处理。 
-2. 处理其它输入过程中可能出现的异常。 
-3. 系统运行结束之后，设置输入文件名称来读取文件的操作，并且对输入错 误造成的异常进行处理。 

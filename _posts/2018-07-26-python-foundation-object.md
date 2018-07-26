@@ -1,400 +1,730 @@
 ---
 layout:     post
-title:      Python Foundation (syntax)
-subtitle:   Python Foundation
+title:      Python Foundation(Object)
+subtitle:   Python Foundation - Object Programming
 date:       2018-07-26
 author:     Allen
 catalog: true
 tags:
     - Python Foundation
-    - Syntax
----
-
-## python概述
-## 基础语法
-## 项目实践
+    - Object Programming
 ---
 
 
-### 1. Python概述
-- 一种面向对象的解释型计算机程序设计语言
-- 具有丰富且强大的内置库和第三方库
-- 语法简洁灵活
-- 开源、跨平台
-
-#### 应用场景：
-- 数据分析
-- 人工智能
-- 网络爬虫
-- 自动化运维
-- Web 开发
+# 大纲
+### 类的构造方法
+### 类的访问权限
+### 继承
+### 多态
+### 项目实践
 
 
-### 2. python的基础语法
+---
 
+### 1. 类的构造方法
 
-- 开发流程
-1. ##### 创建以.py结尾的python文件
-2. ##### 在python文件中输入打印'hello world'的代码（这里的标点可以是单引号或双引号，注意的是要求半角符号[英文输入法情况]，不是全角[中文输入法情况]）
-3. ##### 运行编写完的python代码文件
+链接：[类](http://www.runoob.com/python3/python3-class.html)
 
-- 使用Pycharm创建Python项目
-- 如果做数据可视化测试也可以使用anaconda中的notebook
+- 调用时间：在对象被实例化时被程序自动调用
+- 作用：用于对象创建时初始化
+- 书写格式：init前后分别是两个下划线
+- 程序不显示定义init方法，则程序默认调用一个无参init方法
+- 对象创建过程
 
-### 3. 注释
-- ##### 使用注释的原因
-希望通过自己的语言来描述一段代码的实现逻辑和功能，方便理解代码，易于维护
-
-实例1：
+实例1:
 ```
-#打印hello world
-print('hello world')
+class Dog:
+    def __init__(self):
+        print("我是构造方法，在创建对象时自动调用")
+#         self.gender = gender
+#         self.variety = variety
+#         self.name = name
+#         self.__age = age
+    
+    # 获取对象属性，并打印出来
+    def get_pro(self):
+        print("gender:{},variety:{},name:{},age:{}".format(self.gender,self.variety,self.name,self.__age))
+    #设置对象内部属性
+    def set_pro(self,**kwargs):
+        if "gender" in kwargs:
+            self.gender = kwargs["gender"]
+        elif "age" in kwargs:
+            if kwargs["age"] < 0 or kwargs["age"]>20:
+                print("非法年龄")
+            else:
+                self.__age = kwargs["age"]
+
+    def eat(self):
+        print("正在吃骨头...")
+
+    def drink(self):
+        print("正在喝水....")
+        
+wangcai = Dog()
+wangcai.eat()
+wangcai.drink()
+
+# wangcai就是就是类所创建的实例对象    
+```
+结果：
+```
+我是构造方法，在创建对象时自动调用
+正在吃骨头...
+正在喝水....
+
+#从结果可以看出，在创建对象的时候，init的方法会自动调用
 ```
 
-##### 单行注释
-以#开头，只注释一行，多行注释需要在需要注释的内容开头分别添加
+1. __init__构造方法
+2. 设置对象属性
+3. 创建对象过程
 
-(诀窍，把多行代码选中，ctrl+/ 可以直接多行注释#)
-
-实例2：
+实例2:
 ```
-##打印hello world
-#习惯输入空格，不要让代码挨的太近，不便于观察
-print ('hello world')
+class Dog:
+#通过init的构建方法来设置对象属性
+    def __init__(self,gender,variety,name,age):
+        #print("我是构造方法，在创建对象时自动调用")
+        self.gender = gender
+        self.variety = variety
+        self.name = name
+        self.age = age
+        
+wangcai = Dog('man','golden','wangcai','20')
+print(wangcai.gender)
+print(wangcai.variety)
+print(wangcai.name)
+print(wangcai.age)
+```
+结果：
+
+```
+man
+golden
+wangcai
+20
 ```
 
-##### 多行注释
-'''注释内容'''或者"""注释内容"""，可以对多行内容整体进行注释
+### 2. 类的访问权限
+
+#### 2.1 修改对象属性的方法
+
+方法1：对象变量名.属性 = 新值
+方法1的问题：
+1. 可能修改的属性值不合法
+2. 在类的外部可以随意修改类的内部属性
+
+方法2：对象变量名.内部修改属性方法
+
 
 实例3:
+
 ```
-"""
-注释内容
-"""
+class Dog:
+    def __init__(self,gender,variety,name,age):
+        #print("我是构造方法，在创建对象时自动调用")
+        self.gender = gender
+        self.variety = variety
+        self.name = name
+        self.age = age
+        
+        
 
-'''
-注释内容
-'''
+wangcai = Dog('man','golden','wangcai','20')
 
-#以上两种方法都可以对多行进行注释
-```
-
-##### 注释的作用
-描述一段代码的实现逻辑和功能，增强代码可读性，易于维护
-
-##### 注意
-注释在代码执行过程中不会被执行，注释数量没有限制
-
-### 4. 变量
-#### 4.1 变量的定义
-在python中，变量指向各种类型值的名字，当用到这个类型的值时，直接使用变量即可，不需要再写具体的值
-
-格式：变量名 = 数值/字符串
-
-实例4：
-```
-a = 100
-b = 200 
-c = a + b
-print(c)
-
-m = 'hello'
-n = 'world'
-q = m + n 
-print(q)
+#修改对象属性，方法1直接修改
+wangcai.age = 100
+print(wangcai.age)
 ```
 结果：
 ```
-300
-
-'hello world'
-
+100
 ```
-- 变量的类型不需要显示指定，python解释器会自动判断数据类型，可以把任意数据类型赋值给变量（意思就是说，不用指定变量的类型，python解释器会自动判断）
-- 变量名称命名简介明了，见名知意（意思就是说取变量名的时候最好用英文来当，最好是有实际意义的，这样阅读代码的时候可以知道变量的含义，如果需要，可以加以注释)
-- 使用type(变量)查看变量类型
 
-实例5：
+实例4:
 ```
-#打印个人信息
-name = 'zhangsan'    #名字--字符串
-high = 180           #身高--数值型
-weight = 20.0          #体重--数值型
+class Dog:
+    def __init__(self,gender,variety,name,age):
+        #print("我是构造方法，在创建对象时自动调用")
+        self.gender = gender
+        self.variety = variety
+        self.name = name
+        self.age = age
+    def get_pro(self):
+        print("gender:{},variety:{},name:{},age:{}".format(self.gender,self.variety,self.name,self.age))
+    #设置对象内部属性
+    def set_pro(self,**kwargs):
+        if "gender" in kwargs:
+            self.gender = kwargs["gender"]
+        elif "age" in kwargs:
+            if kwargs["age"] < 0 or kwargs["age"]>20:
+                print("非法年龄")
+            else:
+                self.age = kwargs["age"]
 
-#输入数值并且输出类型
-print(name)
-print(type(name))
-print(high)
-print(type(high))
-print(weight)
-print(type(weight))
+wangcai = Dog("male","golden","wangcai",1)
+#方法2：通过内部方法修改属性
+wangcai.set_pro(age=10)
+wangcai.get_pro()
+
+##这种方法还是可以直接从外部直接修改属性，不够安全，所以引入私有属性概念
 ```
 结果：
 
 ```
-zhangsan
-<class 'str'>
-180
-<class 'int'>
-20.0
-<class 'float'>
+gender:male,variety:golden,name:wangcai,age:10
 
-##更多的数据类型，见下图
 ```
 
-### 5. input输入、print输出
+#### 2.2 私有属性
+定义：__私有变量名
+只能在类内部使用，类外部不能访问，否则报错
 
-#### 5.1 Input()用于在程序中执行过程中接收用户输入的内容，默认接收的输入内容为字符串类型。
+实例5:
+
+```
+##将age变为私有属性
+class Dog:
+    def __init__(self,gender,variety,name,age):
+        #print("我是构造方法，在创建对象时自动调用")
+        self.gender = gender
+        self.variety = variety
+        self.name = name
+        self.__age = age
+    def get_pro(self):
+        print("gender:{},variety:{},name:{},age:{}".format(self.gender,self.variety,self.name,self.__age))
+    #设置对象内部属性
+    def set_pro(self,**kwargs):
+        if "gender" in kwargs:
+            self.gender = kwargs["gender"]
+        elif "age" in kwargs:
+            if kwargs["age"] < 0 or kwargs["age"]>20:
+                print("非法年龄")
+            else:
+                self.__age = kwargs["age"]
+
+wangcai = Dog('man','golden','wangcai',20)
+wangcai.get_pro()
+
+###如果def_pro和def set_pro中的age不加双下划线，则会报错出不存在age这个属性
+```
+结果：
+
+```
+gender:man,variety:golden,name:wangcai,age:20
+
+```
+
+#### 2.3 私有方法
+- 只有在类内部调用，在类的外部无法调用
+- 定义私有方法在方法名前添加两个下划线
+- 类内部调用私有方法要使用self.私有方法的方式调用
 
 实例6：
-```
-card_id = input("请输入卡号:")
-pwd = input("请输入密码:")
 
-print(card_id)
-print(type(card_id))
-print(pwd)
+```
+#私有方法的使用
+class Comrade:
+    #私有方法
+    def __send_message(self):
+        print("消息已经向上级汇报")
+
+    def answer_secret(self,secret):
+        if secret == "芝麻开门":
+            print("接头成功!")
+            self.__send_message()#调用私有方法
+        else:
+            print("接头失败！")
+comrade = Comrade()
+comrade.answer_secret("芝麻开门")
 ```
 结果：
+
 ```
-请输入卡号:123
-请输入密码:123
-123
-<class 'str'>
-123
+接头成功!
+消息已经向上级汇报
 
 ```
 
-#### 5.2 print()用于在程序执行过程中输入内容
-- 直接输出内容
-- 输出单个和多个变量
-- 格式化输入
-- 格式化输出应用示例:print('你输入的名字是：%s'%name) 或者print('你输入的名字是{}。'.format(name))
+### 3. 继承
+
+在程序中，继承描述的是类中类型与子类型之间的所属关系，例如猫和狗都属于动物
+
+#### 单继承
+ 1. 子类继承一个父类，在定义子类时，小括号()中写父类的类名 
+ 2. 父类的非私有属性、方法，会被子类继承
+ 3. 子类中方法的查找方式：先查找子类中对应的方法，如果找不到，再到父类中查找
+ 4. 子类可以继承父类的属性和方法，也可以继承父类的非私有属性和方法，依次类推
+ 5. 在子类中调用父类的方法：ClassName.methodname(self)
 
 实例7:
+
 ```
-name = input()
-print('你输入的名字是：%s'%name)
-print('你输入的名字是：{}。'.format(name))
+class Animal:
+    def __init__ (self):
+        print("---animal构造方法----")
+    
+    def __private_method(self):
+        print('私有方法')
+    def eat(self):
+        print('-----吃-----')
+    def drink(self):
+        print('-----喝-----')
+    def run(self):
+        print('-----跑-----')
+
+class Dog(Animal):
+    def __init__(self):
+        print('dog构造方法')
+        
+    def hand(self):
+    ##子类在类里面调用父类的方法
+        Animal.run(self)
+        print('----握手-----')
+
+wangcai =Dog()
+#调用从父类继承的方法
+wangcai.eat()
+wangcai.drink()
+wangcai.run()
+#调用自身的方法
+wangcai.hand()
+
+#调用父类的私有方法，会被报错，不能继承父类的私有方法
+# wangcai.__private_method
+
+
+#如果在子类中没有定义init构造方法，则自动调用父类的init构造方法，如果在子类中定义了init构造方法，则不会调用父类的构造方法
+duoduo = Dog()
+duoduo.run()
+```
+结果：
+
+```
+dog构造方法
+-----吃-----
+-----喝-----
+-----跑-----
+-----跑-----
+----握手-----
+dog构造方法
+-----跑-----
+```
+
+#### 重写父类方法
+- 子类对父类允许访问的方法的实现过程进行重新编写
+- 在子类中定义与父类同名的方法
+- 优点：子类可以根据需要，定义合适的方法实现逻辑
+
+实例8
+```
+class Animal:
+    def __init__ (self):
+        print("---animal构造方法----")
+    
+    def __private_method(self):
+        print('私有方法')
+    def eat(self):
+        print('-----吃-----')
+    def drink(self):
+        print('-----喝-----')
+    def run(self):
+        print('-----跑-----')
+
+class Dog(Animal):
+    #父类方法重写 #只要够名称覆盖掉父类的方法就可以实现重写
+    def run(self):
+        print('摇着尾巴跑')
+    def hand(self):
+        print('----握手-----')
+wangcai =Dog()
+wangcai.run()
+
 ```
 结果：
 ```
-zhangsan 
-你输入的名字是：zhangsan 
-你输入的名字是：zhangsan 。
-
-#常用的格式符号见下图
-```
-#常用的格式化符号有 %d，%s，%f
-
-实例8:
-```
-#多个变量同时输出
-card_id = "234567"
-pwd = 123
-#\n是换行符
-print("您输入的卡号是：%s，\n您输入的密码是：%d" %(card_id,pwd))
-
-print('====分割线====')
-print('您输入的卡号是：{},\n您输入的密码是：{}'.format(card_id,pwd))
-```
-结果：
-```
-您输入的卡号是：234567，
-您输入的密码是：123
-====分割线====
-您输入的卡号是：234567,
-您输入的密码是：123
+---animal构造方法----
+摇着尾巴跑
 
 ```
+#### 多继承
+- object 类是所有类的基类，在定义类的时候不需要显示的在括号中表明继承自object类
+
+多继承：一个子类可以继承多个父类
+- 多继承定义方式：在类名后的括号中添加需要继承的多个类名
+- 多继承中，如果多个类中有同名的方法，子类调用查找方法的顺序是按照小括号内继承父类从左到右的顺序查找，第一个匹配方法名的父类方法将会被调用
+
 实例9：
 ```
-#格式化输出浮点数,并指定精度
-height = 180.35234
-print("您的身高是：%.2f cm" %height)
-print('您的身高是：{:.2f} cm'.format(height))
-```
+#多继承中方法的名称尽量不一样，要不然会出现不必要的错误和困扰，比如下面的data_handle
+class AI:
+    #人脸识别
+    def face_recongnition(self):
+        print("人脸识别")
+    def data_handle(self):
+        print("AI数据处理")
 
+class BigData:
+    def data_analysis(self):
+        print("数据分析")
+    def data_handle(self):
+        print("BigData数据处理")
+
+class Python(BigData,AI):
+    def operation(self):
+        print("自动化运维")
+    
+py = Python()
+py.face_recongnition()
+py.data_analysis()
+py.operation()
+py.data_handle()
+print(Python.__mro__) #查看调用方法的搜索顺序
+```
 结果：
-
 ```
-您的身高是：180.35 cm
-您的身高是：180.35 cm
-
+人脸识别
+数据分析
+自动化运维
+BigData数据处理
+(<class '__main__.Python'>, <class '__main__.BigData'>, <class '__main__.AI'>, <class 'object'>)
 ```
+#### 多态
+一个抽象类有多个子类，不同的类表现出多种形态
+
 实例10：
 ```
-#格式化输出时，打印%，要使用%%表示是字符串而不是转换说明符
-p = 99.99321
-print("您战胜了全国%.2f%%的用户" %p)
-print('您战胜了全国{:.2f}的用户'.format(p))
+#子类的的方法是会覆盖掉父类的方法，只有存在继承，才能存在多态
+class Animal:
+    def eat(self):
+        print("Animal正在吃饭")
+
+class Dog(Animal):
+    def eat(self):
+        print("Dog正在吃饭")
+
+class Cat(Animal):
+    def eat(self):
+        print("Cat正在吃饭")
+
+def show_eat(obj):
+    obj.eat()
+
+wangcai = Dog()
+show_eat(wangcai)
+tom = Cat()
+show_eat(tom)
 ```
 结果：
 ```
-您战胜了全国99.99%的用户
-您战胜了全国99.99的用户
+Dog正在吃饭
+Cat正在吃饭
 
 ```
-实例11：
-```
-#print无换行输出
-print("hello",end="")
-print("python")
-```
-结果：
+### 4.项目实践
+#### 无人便利店
+- 用户管理系统
+- 仓库管理系统
+- 货架管理系统
+- 升级购物车
+- 推荐系统
 
+实例11:
 ```
-hellopython
+import datetime
+import csv
+'''
+用户管理系统
+仓库管理系统
+货架管理系统
+升级购物车
+推荐系统
+'''
 
-```
+class WarehouseManageSys:
+    
+    """
+    仓库管理系统
+    """
+    def __init__(self):
+        #商品清单
+        self.item_detail = {"老坛酸菜":5, "红烧牛肉":4, "酸辣粉":6, "拉面":7,"老干妈":10, "乌江":2,"王中王":2, "蒜肠":12, "淀粉肠":8}
+    '''
+    功能：根据商品类型返回商品列表
+    参数说明：
+        item_type:商品类型
+    '''
+    def get_item_list(self,item_type):  #为什么这里要输入item_type
+    # 泡面
+        pm_list = ["老坛酸菜", "红烧牛肉", "酸辣粉", "拉面"]
+    # 榨菜
+        zc_list = ["老干妈", "乌江"]
+    # 香肠
+        xc_list = ["王中王", "蒜肠", "淀粉肠"]
+        if item_type == "pm":
+            return pm_list
+        elif item_type == "zc":
+            return zc_list
+        elif item_type == "xc":
+            return xc_list
+        
+    '''
+    功能：添加或者更新商品价格
+    参数说明：
+        kwargs：商品名称和价格的键值对，可以传入多个
+    '''
+    def add_update_item_info(self,**kwargs):  #利用不定长参数
+        for item,price in kwargs.items():
+            self.item_detail['item'] = price
 
-实例12：
-```
-#输出换行符
-print("中国\n北京")
-#转义字符\
-print("中国\\n北京")
-```
-结果：
-```
-中国
-北京
-中国\n北京
-```
+#货架管理系统
 
-### 6. 类型转换
-#### 不同的类型之间进行转换
+class RackManageSys:
+    '''
+    功能：检测货架上的商品是否需要补货
+    参数说明：
+        rack：货架列表
+        item_tpye:商品类型
+        item_counts:货架可摆放的商品数量
+        warehouse_manage:仓库管理系统的对象
+    '''
+    def check_add_rack(self,rack, item_type, item_counts,warehouse_manage):
+        if len(rack) == 0:
+            print("---正在更新货架，请稍等---")
+            #根据商品类型从仓库中获取商品列表
+            item_list = warehouse_manage.get_item_list(item_type)
+            while len(rack) < item_counts:
+                rack_index = len(rack) % len(item_list)
+                rack.append(item_list[rack_index])
+            print("----商品已上架----")
+            
+#日志管理系统
+class LogMangerSys:
+    def __init__(self):
+        self.buy_logs = []
+    '''
+    功能：获取写日志的当前时间
+    参数：
+        format：日期格式化方式，如："%Y%m%d"
+    '''
+    def get_log_time(self, format):
+        log_time = datetime.datetime.now().strftime(format)
+        return log_time
 
-实例13：
+    '''
+    功能：将日志追加到csv文件持久化存储
+    参数：
+    file_path：文件路径
+    file_name：文件名称
+    header：文件标题
+    data：日志数据，[{key:value}]
+    '''
+    def write_log_append_csv(self, file_path, file_name, header, data):
+        # 写日志时间
+        log_time = self.get_log_time("%Y%m%d")
+        print("log_time:{}".format(log_time))
+        # 文件格式：file_path + file_name+log_time
+        # 输出的csv文件名称
+        new_file_name = file_path + file_name + "_" + log_time + ".csv"
+        with open(new_file_name, "a", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, header)
+            # writer.writeheader()
+            writer.writerows(data)
 
-```
-a = 123
-print(a)
-print(type(a))
-print('将int类型转换成字符型：')
-b = str(a)
-print(b)
-print(type(b))
+    '''
+    功能：用户购买日志写入到日志文件
+    参数说明：
+        user_id：用户编号
+        money：消费金额
+        items：购买商品列表，格式:[{"user_id":"user_id1","money":20,"items":(item1,itme2....)}]
+    '''
+    def buy_log_manage(self,user_id, money, *items):
+        buy_log = {"user_id": user_id, "money": money, "items": items}
+        self.buy_logs.append(buy_log)
+        # ------------v4 start------------------#
+        item_str = ""  # 格式：老干妈|王中王
+        for item in items:
+            if item_str == "":
+                item_str = item
+            else:
+                item_str += "|" + item
 
-print('将int类型装换成浮点型')
-c = float(a)
-print(c)
-print(type(c))
-```
-结果：
-```
-123
-<class 'int'>
-将int类型转换成字符型：
-123
-<class 'str'>
-将int类型装换成浮点型
-123.0
-<class 'float'>
-```
+        file_path = "d://"
+        file_name = "user_buy_log"
+        header = ["user_id", "money", "items"]
+        buy_log = [{"user_id": user_id, "money": money, "items": item_str}]
+        #调用自身将日志数据写入到CSV文件的方法
+        self.write_log_append_csv(file_path, file_name, header, buy_log)
 
+#用户管理系统
+class UserManageSys:
+    def __init__(self):
+        self.user_id_set = set()
+    '''
+    功能：添加新用户
+    参数说明：
+        user_id：用户编号
+    '''
+    def add_new_user(self,user_id):
+        if user_id not in self.user_id_set:
+            self.user_id_set.add(user_id)
+    '''
+    功能：验证用户是否是VIP
+    参数说明：
+        user_id：用户编号
+    '''
+    def if_vip(self,user_id):
+        if user_id in self.user_id_set:
+            return True
+        else:
+            return False
 
+#购物车
+class BuyCar:
+    def __init__(self,user_id,user_manage):
+        self.user_id = user_id
+        #验证用户是否是VIP
+        self.if_vip = user_manage.if_vip(self.user_id)
+        #初始化一个购物车的车筐
+        self.buy_car = []
+    '''
+    功能：向购物车添加商品
+    参数说明：
+        pm_rack：泡面货架
+        zc_rack：榨菜货架
+        xc_rack：香肠货架
+        item_id：商品编号
+    '''
+    def add_item_2_car(self,pm_rack,zc_rack,xc_rack,item_id):
+        if int(item_id) == 1:
+            if len(pm_rack) >= 1:
+                self.buy_car.append(pm_rack[len(pm_rack) - 1])
+                pm_rack.pop()
+            else:
+                print("亲！非常抱歉，泡面已卖完。")
+        elif int(item_id) == 2:
+            if len(zc_rack) >= 1:
+                self.buy_car.append(zc_rack[len(zc_rack) - 1])
+                zc_rack.pop()
+            else:
+                print("亲！非常抱歉，榨菜已卖完。")
+        elif int(item_id) == 3:
+            if len(xc_rack) >= 1:
+                self.buy_car.append(xc_rack[len(xc_rack) - 1])
+                xc_rack.pop()
+            else:
+                print("亲！非常抱歉，香肠已卖完。")
+        else:
+            print("亲！您输入的商品还在火星，请输入在售的商品编号！")
 
+    '''
+    功能：购物车结算
+    参数说明：
+        warehouse_manage：仓库管理系统对象，用于获取商品价格清单
+    '''
+    def account(self,warehouse_manage):
+        total_money = 0
+        for item in self.buy_car:
+            total_money += warehouse_manage.item_detail.get(item, 0)
+        if self.if_vip:
+            vip_money = total_money * 0.9
+            total_money = float("%.2f" % vip_money)
+        return total_money
+#推荐系统父类
+class RecommendSys:
+    def recommend(self):
+        print("推荐商品")
 
+#基于物品的推荐系统
+class BaseItemRecommendSys(RecommendSys):
+    def recommend(self,user_id,buy_logs):
+        user_item_set = set()  #被推荐人历史购买商品
+        other_user_item_dict = {}  # 其他用户历史购买商品 {"user_id":{item1,item2}}
+        for log in buy_logs:
+            user_id_key = log["user_id"]
+            items_value = log["items"]
+            if user_id_key == user_id:
+                user_item_set.update(items_value)
+            else:
+                items_set = other_user_item_dict.get(user_id_key)
+                if items_set == None:
+                    other_user_item_dict[user_id_key] = set(items_value)
+                else:
+                    items_set.update(items_value)
+                    other_user_item_dict[user_id_key] = items_set
 
-实例14：
-```
-#eval(str)把字符串自动转换成合适的数据类型
-a1= eval("123")
-a2 = eval("3.14")
-print(type(a1))
-print(type(a2))
-```
-结果：
-```
-<class 'int'>
-<class 'float'>
+        recommend_list = []  # 被推荐列表
+        for value_set in other_user_item_dict.values():
+            inner_set = user_item_set & value_set
+            length = len(inner_set)
+            if length > 0 and length < len(value_set):
+                diff_set = value_set - user_item_set
+                recommend_list.append({"common_num": length, "items": diff_set})
+        if len(recommend_list) > 0:
+            recommend_list.sort(key=lambda x: x["common_num"], reverse=True)
+            recommend_set = recommend_list[0]["items"]
+            return list(recommend_set)  # 集合转列表
+class UnstaffedStore:
+    # 购物大厅
+    def shopping_hall(self):
+        #仓库管理系统初始化
+        warehouse_manage = WarehouseManageSys()
+        #货架管理系统初始化
+        rack_manage = RackManageSys()
+        #用户管理系统初始化
+        user_manage = UserManageSys()
+        #日志管理系统初始化
+        log_manage = LogMangerSys()
+        #推荐系统初始化
+        recommend_sys = BaseItemRecommendSys()
 
-```
+        # 三个空货架
+        pm_rack = []
+        zc_rack = []
+        xc_rack = []
+        # 货架摆放商品数量
+        pm_rack_counts = 1
+        zc_rack_counts = 1
+        xc_rack_counts = 1
 
-### 7. 标识符、命名规则、关键字
-#### 7.1 标识符
-- 在python程序开发过程中，自定义的一些符号、名称
-- 由字母、数字、下划线（_）组成，不能以数字开头
-- 标识符区分大小写
+        while True:
+            print("欢迎光临")
+            user_id = ""
+            while True:
+                user_id = input("请输入手机号作为用户id使用：")
+                if user_id != "":
+                    user_manage.add_new_user(user_id)
+                    break
+                else:
+                    print("输入的手机号不能为空，请输入正确的手机号！")
+            #给用户分配一个购物车
+            buy_car = BuyCar(user_id,user_manage)
 
-实例15：
-```
-#不能以数字开头
-2student = 'zhangsan'
-print(2student)
-#报错语法错误
-```
-结果：
-```
-  File "<ipython-input-15-978c7772c00c>", line 2
-    2student = 'zhangsan'
-           ^
-SyntaxError: invalid syntax
-```
-
-实例16：
-```
-#python解释器是可以区分大小写的
-student_name = 'zhangsan'
-Student_name = 'lisi'
-print(student_name)
-print(Student_name)
-```
-结果：
-```
-zhangsan
-lisi
-```
-
-#### 7.2 命名规则
-- 见名如意，如name
-- 驼峰命名法，如类名(UserInfo)、异常名(ValueError)等
-- 小写字符+下划线，如变量名(user_name)、函数名(get_name)
-- 不能使用关键字
-
-#### 7.3 关键字
-- 在python内部具有特殊功能的标识符
-- 通过keyword模块的kwlist函数查看
-
-实例17：
-```
-import keyword
-#打印py3的关键字，命名是不能使用的
-print(keyword.kwlist)
-```
-结果：
-
-```
-
-['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
-
-```
-
-
-### 8. 项目--计算器
-
-实例18：
-```
-num1 = input("请输入第一个数字：")
-operator = input("请输入运算符：")
-num2 = input("请输入第二个数字：")
-
-num_1 = int(num1)
-num_2 = int(num2)
-
-if operator == "+":
-    result = num_1 + num_2
-    print("计算结果：{}".format(result))
-elif operator == "%":
-    result = num_1 % num_2
-    print("计算结果：{}".format(result))
-elif operator == "**":
-    result = num_1 ** num_2
-    print("计算结果：{}".format(result))
-elif operator == "//":
-    result = num_1 // num_2
-    print("计算结果：{}".format(result))
-else:
-    print("正在开发..")
+            while True:
+                # 自动检测货架是否需要补货
+                rack_manage.check_add_rack(pm_rack, "pm", pm_rack_counts,warehouse_manage)
+                rack_manage.check_add_rack(zc_rack, "zc", zc_rack_counts,warehouse_manage)
+                rack_manage.check_add_rack(xc_rack, "xc", xc_rack_counts,warehouse_manage)
+                item_id = input("==本店售卖商品：1 泡面，2 榨菜，3 香肠。请输入想要购买的商品编号：")
+                #向购物车添加商品
+                buy_car.add_item_2_car(pm_rack,zc_rack,xc_rack,item_id)
+                if_buy = input("请输入y或者n选择是否继续购物：")
+                if if_buy == "n":
+                    #购物车结算
+                    if len(buy_car.buy_car) > 0:
+                        total_money = buy_car.account(warehouse_manage)
+                        print("您的购物车商品如下：", buy_car.buy_car)
+                        print("$您本次消费金额{}元：".format(total_money))
+                        # 购物日志管理
+                        log_manage.buy_log_manage(user_id, total_money, *buy_car.buy_car)
+                        recommend_item_list = recommend_sys.recommend(user_id,log_manage.buy_logs)
+                        if recommend_item_list != None:
+                            print("买了该商品的其他用户，还买了{}".format(recommend_item_list))
+                        print("欢迎下次光临")
+                    else:
+                        print("您没有购买任何商品")
+                        print("欢迎下次光临")
+                    break
+store = UnstaffedStore()
+store.shopping_hall()
 ```
